@@ -1,0 +1,20 @@
+
+version: '3.9'
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/jobtracker
+      - JWT_SECRET=supersecret
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:6
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
