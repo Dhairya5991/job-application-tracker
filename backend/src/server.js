@@ -11,13 +11,12 @@ app.use(cors());
 app.use(morgan('dev'));
 
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error(err));
+  .then(() => console.log('MongoDB connected'));
 
-app.get('/health', (req, res) => res.json({status: 'UP'}));
+app.get('/health', (req,res)=>res.json({status:'UP'}));
 
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/jobs', require('./routes/jobs'));
+app.use('/api/admin', require('./routes/admin'));
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+app.listen(5000, ()=>console.log('Backend running'));
